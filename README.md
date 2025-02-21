@@ -13,25 +13,6 @@ Prerequisites
 2. PostgreSQL (v13 or higher)
 3. Apache Kafka (v3.0 or higher)
 
-polling-system/
-├── src/
-│   ├── config/
-│   │   ├── db.js       # Database configuration
-│   │   └── kafka.js    # Kafka configuration
-│   ├── controllers/
-│   │   ├── pollController.js
-│   │   └── leaderboardController.js
-│   ├── models/
-│   │   ├── Poll.js
-│   │   └── PollOption.js
-│   ├── services/
-│   │   ├── kafkaConsumer.js
-│   │   └── kafkaProducer.js
-│   ├── websocket/
-│   │   └── WebSocketManager.js
-│   └── app.js         # Main application file
-├── .env              # Environment variables
-└── package.json
 
 ##Installation 
 
