@@ -16,7 +16,7 @@ async function initKafka() {
     try {
         await producer.connect();
         await consumer.connect();
-        await consumer.subscribe({ topic: 'votes', fromBeginning: true });
+        // Remove the subscribe here since it's handled in KafkaConsumerService
         console.log('Kafka connected successfully');
     } catch (error) {
         console.error('Kafka connection failed:', error);

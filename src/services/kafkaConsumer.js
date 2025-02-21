@@ -10,6 +10,8 @@ class KafkaConsumerService {
 
     async start() {
         try {
+            // Add the subscribe here
+            await consumer.subscribe({ topic: 'votes', fromBeginning: true });
             await consumer.run({
                 eachMessage: async ({ topic, partition, message }) => {
                     await this.processVote(JSON.parse(message.value.toString()));

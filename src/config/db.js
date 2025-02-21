@@ -1,24 +1,27 @@
-import { createConnection } from 'typeorm';
-import { Poll } from '../models/Poll';
-import { PollOption } from '../models/PollOption';
-import { Vote } from '../models/Vote';
+const { Sequelize } = require('sequelize');
+require('dotenv').config();
 
-export const initializeDatabase = async () => {
+const sequelize = new Sequelize({
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  dialect: 'postgres'
+});
+
+async function initDb() {
   try {
-    const connection = await createConnection({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'your_password',
-      database: 'polling_system',
-      entities: [Poll, PollOption, Vote],
-      synchronize: true // Note: Disable in production
-    });
-    console.log('Database connection established');
-    return connection;
+    await sequelize.authenticate();
+    await sequelize.sync();
+    console.log('Database connected successfully');
   } catch (error) {
     console.error('Database connection failed:', error);
     throw error;
   }
+}
+
+module.exports = {
+  sequelize,
+  initDb
 };
